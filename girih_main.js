@@ -46,7 +46,7 @@ const shapes = [];
 
 // TODO : Vraiment besoin d'une fonction ?
 function addShape(center) {
-  shapes.push(new Girih(center, 10, currGirihType));
+  shapes.push(new Girih(center, currGirihType));
 }
 
 // drawing on canvas
@@ -66,12 +66,11 @@ canvas.addEventListener("mousemove", (ev) => {
 
   // Dessiner toutes les formes
   shapes.forEach((c) => {
-    renderer.drawGirih(c, 10);
+    renderer.drawGirih(c);
   });
 
   // Dessiner la forme temporaire à l'emplacement de la souris
   renderer.drawGirih(
-    new Girih(new Vec2d(ev.offsetX, ev.offsetY), 10, currGirihType),
-    10
+    new Girih(new Vec2d(ev.offsetX, ev.offsetY), currGirihType)
   );
 });
