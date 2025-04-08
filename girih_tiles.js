@@ -19,7 +19,6 @@ export const GirihType = Object.freeze({
 export class Girih {
     // TODO : Pourquoi edge_length est une variable !!!!!!!!!!!!!!!
     /**
-     *
      * @param {Vec2d} center
      * @param {number} edge_length
      * @param {GirihType} girihtype
