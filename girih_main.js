@@ -5,11 +5,7 @@ import { Vec2d } from "./vector2d.js";
 
 let canvas = document.getElementById('c');
 let renderer = new CanvasRenderer(canvas);
-
 let clear = document.getElementById('clear');
-clear.addEventListener("click", () => {
-    renderer.clear()
-})
 
 // shape selection
 
@@ -55,6 +51,11 @@ function addShape(center){
 }
 
 // drawing on canvas
+
+clear.addEventListener("click", () => {
+    shapes = [];
+    renderer.clear()
+})
 
 canvas.addEventListener("click", (ev) => {
     let new_p = new Vec2d(ev.offsetX, ev.offsetY)

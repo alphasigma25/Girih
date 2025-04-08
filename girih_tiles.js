@@ -16,7 +16,6 @@ export const GirihType = Object.freeze({
 
 export class Girih {
     /**
-     *
      * @param {Vec2d} center
      * @param {number} edge_length
      * @param {GirihType} girihtype
