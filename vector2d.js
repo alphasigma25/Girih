@@ -1,3 +1,4 @@
+"use strict";
 export class Vec2d {
     /**
      * @param {number} x
@@ -12,6 +13,7 @@ export class Vec2d {
         return `(${this.x},${this.y})`
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {number} n
      * @return {Vec2d}
@@ -20,6 +22,7 @@ export class Vec2d {
         return new Vec2d(this.x * n, this.y * n)
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} o
      * @return {Vec2d}
@@ -28,6 +31,7 @@ export class Vec2d {
         return new Vec2d(this.x + o.x, this.y + o.y)
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} o
      * @return {Vec2d}
@@ -36,6 +40,7 @@ export class Vec2d {
         return new Vec2d((this.x + o.x) / 2, (this.y + o.y) / 2)
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} v
      * @return {function(number): Vec2d}

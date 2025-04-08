@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,18 +13,18 @@
 
     <canvas id="c" width="800" height="500"></canvas>
     <div>
-        <button id="clear">Clear</button>
+        <button type="button" id="clear">Clear</button>
 
         <div id="shape">
-            <input type="radio" name="shape" id="girih1" value=1>Girih 1</input>
-            <input type="radio" name="shape" id="girih2" value=2>Girih 2</input>
-            <input type="radio" name="shape" id="girih3" value=3>Girih 3</input>
-            <input type="radio" name="shape" id="girih4" value=4>Girih 4</input>
-            <input type="radio" name="shape" id="girih5" value=5>Girih 5</input>
+            <!--TODO : utiliser des noms plus explicites / Afficher la forme au lieu d'utiliser un nom-->
+            <label>Girih 1<input type="radio" name="shape" id="girih1" value=1 checked></label>
+            <label>Girih 2<input type="radio" name="shape" id="girih2" value=2></label>
+            <label>Girih 3<input type="radio" name="shape" id="girih3" value=3></label>
+            <label>Girih 4<input type="radio" name="shape" id="girih4" value=4></label>
+            <label>Girih 5<input type="radio" name="shape" id="girih5" value=5></label>
         </div>
     </div>
 
     <script src="girih_main.js" type="module"></script>
 </body>
-
 </html>

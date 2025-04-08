@@ -1,5 +1,7 @@
+"use strict";
 import { Vec2d } from "./vector2d.js";
 
+// TODO : Utiliser l'enum de manière plus pratique / Correcte !!!!!!!!!!!!!!!!!!
 export const GirihType = Object.freeze({
     deca: 8,
     penta: 16,
@@ -15,6 +17,7 @@ export const GirihType = Object.freeze({
 
 
 export class Girih {
+    // TODO : Pourquoi edge_length est une variable !!!!!!!!!!!!!!!
     /**
      *
      * @param {Vec2d} center
@@ -27,11 +30,13 @@ export class Girih {
         this.girihtype = girihtype;
     }
 
+    // TODO : Déplacer
     /**
      * @returns {[number]}
      */
     getAngles() {
         let angles = [];
+        // TODO : Enlever la catastrophe ?
         switch (this.girihtype) {
             case 8: angles = [0, 144, 144, 144, 144, 144, 144, 144, 144, 144]; break;
 
@@ -55,9 +60,9 @@ export class Girih {
             case 42: angles = [72, 72, 144, 144, 72, 144]; break;
             case 43: angles = [108, 72, 144, 144, 72, 144]; break;
             case 44: angles = [144, 72, 144, 144, 72, 144]; break;
+
             default : throw new Error("Invalid girihtype");
         }
         return angles;
     }
-
 }

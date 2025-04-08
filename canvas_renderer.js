@@ -1,8 +1,8 @@
+"use strict";
 import { Vec2d } from "./vector2d.js";
-import { Girih, GirihType } from "./girih_tiles.js";
+import { Girih } from "./girih_tiles.js";
 
 export class CanvasRenderer {
-
     /**
      * @param {HTMLCanvasElement} canvas
      */
@@ -11,6 +11,7 @@ export class CanvasRenderer {
         this.ctx = canvas.getContext('2d');
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} p
      */
@@ -21,6 +22,7 @@ export class CanvasRenderer {
         this.ctx.stroke()
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} p1
      * @param {Vec2d} p2
@@ -32,6 +34,7 @@ export class CanvasRenderer {
         this.ctx.stroke()
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} center
      * @param {number} radius
@@ -42,6 +45,7 @@ export class CanvasRenderer {
         this.ctx.stroke();
     }
 
+    // TODO : Supprimer ?
     /**
      * @param {Vec2d} center
      * @param {number} width
@@ -57,23 +61,24 @@ export class CanvasRenderer {
      * @param {Girih} girih
      * @param {number} edgeLength
      */
-    drawGirih(girih, edgeLength){
-        let angles = girih.getAngles()
-        this.drawFromAngles(girih.center, angles, edgeLength);
+    drawGirih(girih, edgeLength){ // TODO : Supprimer edge length
+        this.drawFromAngles(girih.center, girih.getAngles(), edgeLength); // TODO : Séparer center de start point
     }
 
+    // TODO : Vraiment besoin d'une fonction ?
     /**
      * @param {Vec2d} startPoint
      * @param {[number]} angles
      * @param {number} edge_length
      */
-    drawFromAngles(startPoint, angles, edgeLength){
+    drawFromAngles(startPoint, angles, edgeLength){ // TODO : Supprimer edge length
         let x = startPoint.x;
         let y = startPoint.y;
 
         this.ctx.beginPath();
         this.ctx.moveTo(x, y);
 
+        // TODO : Gerer en utilisant des points et pas des angles
         let currAngle = angles[0];
         for (let i = 1; i < angles.length; i++) {
             // Calculer le prochain point en utilisant la longueur du côté et l'angle
