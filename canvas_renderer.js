@@ -1,6 +1,6 @@
 "use strict";
 import { Vec2d } from "./vector2d.js";
-import { Girih } from "./girih_tiles.js";
+import { Girih, GirihType } from "./girih_tiles.js";
 
 export class CanvasRenderer {
   /**
@@ -8,12 +8,13 @@ export class CanvasRenderer {
    */
   constructor(canvas) {
     this.canvas = canvas;
-    this.ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
+    if (ctx == null) throw new Error("Unsupported browser");
+    this.ctx = ctx;
   }
 
   /**
    * @param {Girih} girih
-   * @param {number} edgeLength
    */
   drawGirih(girih) {
     this.drawFromAngles(girih.center, this.getAngles(girih.girihtype)); // TODO : Séparer center de start point
@@ -22,7 +23,7 @@ export class CanvasRenderer {
   // TODO : Vraiment besoin d'une fonction ?
   /**
    * @param {Vec2d} startPoint
-   * @param {[number]} angles
+   * @param {number[]} angles
    */
   drawFromAngles(startPoint, angles) {
     let x = startPoint.x;
@@ -53,74 +54,29 @@ export class CanvasRenderer {
   }
 
   /**
-   * @returns {[number]}
+   * @returns {number[]}
    */
   getAngles(girihtype) {
-    let angles = [];
-    // TODO : Enlever la catastrophe ?
-    switch (girihtype) {
-      case 8:
-        angles = [0, 144, 144, 144, 144, 144, 144, 144, 144, 144];
-        break;
+    let angle = 36 * (girihtype & 7);
 
-      case 16:
-        angles = [0, 108, 108, 108, 108];
-        break;
-      case 17:
-        angles = [36, 108, 108, 108, 108];
-        break;
+    switch (girihtype & ~7) {
+      case GirihType.deca:
+        return [angle, 144, 144, 144, 144, 144, 144, 144, 144, 144];
 
-      case 24:
-        angles = [0, 72, 360 - 144, 72, 72, 360 - 144];
-        break;
-      case 25:
-        angles = [36, 72, 360 - 144, 72, 72, 360 - 144];
-        break;
-      case 26:
-        angles = [72, 72, 360 - 144, 72, 72, 360 - 144];
-        break;
-      case 27:
-        angles = [108, 72, 360 - 144, 72, 72, 360 - 144];
-        break;
-      case 28:
-        angles = [144, 72, 360 - 144, 72, 72, 360 - 144];
-        break;
+      case GirihType.penta:
+        return [angle, 108, 108, 108, 108];
 
-      case 32:
-        angles = [0, 108, 72, 108];
-        break;
-      case 33:
-        angles = [36, 108, 72, 108];
-        break;
-      case 34:
-        angles = [72, 108, 72, 108];
-        break;
-      case 35:
-        angles = [108, 108, 72, 108];
-        break;
-      case 36:
-        angles = [144, 108, 72, 108];
-        break;
+      case GirihType.bowtie:
+        return [angle, 72, 360 - 144, 72, 72, 360 - 144];
 
-      case 40:
-        angles = [0, 72, 144, 144, 72, 144];
-        break;
-      case 41:
-        angles = [36, 72, 144, 144, 72, 144];
-        break;
-      case 42:
-        angles = [72, 72, 144, 144, 72, 144];
-        break;
-      case 43:
-        angles = [108, 72, 144, 144, 72, 144];
-        break;
-      case 44:
-        angles = [144, 72, 144, 144, 72, 144];
-        break;
+      case GirihType.rhombus:
+        return [angle, 108, 72, 108];
+
+      case GirihType.hexa:
+        return [angle, 72, 144, 144, 72, 144];
 
       default:
         throw new Error("Invalid girihtype");
     }
-    return angles;
   }
 }

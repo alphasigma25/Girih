@@ -4,12 +4,31 @@ import { Girih, GirihType } from "./girih_tiles.js";
 import { Vec2d } from "./vector2d.js";
 
 const canvas = document.getElementById("c");
+const shape = document.getElementsByName("shape");
+
+for (const element of shape) {
+  if (!(element instanceof HTMLInputElement))
+    throw new Error("Unsupported browser");
+}
+
+const shape_selection = document.getElementById("shape");
+const clearButton = document.getElementById("clear");
+
+if (canvas == null) throw new Error("Unsupported browser");
+if (shape_selection == null) throw new Error("Unsupported browser");
+if (clearButton == null) throw new Error("Unsupported browser");
+
+if (!(canvas instanceof HTMLCanvasElement))
+  throw new Error("Unsupported browser");
+
 const renderer = new CanvasRenderer(canvas);
 
-// shape selection
+const shapes = [];
 
-const shape = document.getElementsByName("shape");
-const shape_selection = document.getElementById("shape");
+// TODO : Vraiment besoin d'une fonction ?
+function addShape(center) {
+  shapes.push(new Girih(center, currGirihType));
+}
 
 let currGirihType = GirihType.deca;
 
@@ -37,21 +56,11 @@ shape_selection.addEventListener("click", () => {
       currGirihType = GirihType.bowtie;
       break;
     default:
-      currGirihType = -1; // TODO : !!!!!!!!!!!!!!!!!!!!!!!!!
+      throw new Error("Unsupported browser");
   }
 });
 
-// instantiation
-const shapes = [];
-
-// TODO : Vraiment besoin d'une fonction ?
-function addShape(center) {
-  shapes.push(new Girih(center, currGirihType));
-}
-
-// drawing on canvas
-
-document.getElementById("clear").addEventListener("click", () => {
+clearButton.addEventListener("click", () => {
   shapes.length = 0;
   renderer.clear();
 });
