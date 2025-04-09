@@ -32,6 +32,16 @@ function addShape(center: Vec2d) {
   shapes.push(new Girih(center, currGirihType));
 }
 
+function draw() {
+  // Effacer le canvas
+  renderer.clear();
+
+  // Dessiner toutes les formes
+  shapes.forEach((c) => {
+    renderer.drawGirih(c);
+  });
+}
+
 let currGirihType = GirihType.deca;
 
 shape_selection.addEventListener("click", () => {
@@ -72,16 +82,14 @@ canvas.addEventListener("click", (ev) => {
 });
 
 canvas.addEventListener("mousemove", (ev) => {
-  // Effacer le canvas
-  renderer.clear();
-
-  // Dessiner toutes les formes
-  shapes.forEach((c) => {
-    renderer.drawGirih(c);
-  });
+  draw();
 
   // Dessiner la forme temporaire à l'emplacement de la souris
   renderer.drawGirih(
     new Girih(new Vec2d(ev.offsetX, ev.offsetY), currGirihType)
   );
+});
+
+canvas.addEventListener("mouseleave", (ev) => {
+  draw();
 });
