@@ -1,10 +1,9 @@
 "use strict";
 export class Vec2d {
-  /**
-   * @param {number} x
-   * @param {number} y
-   */
-  constructor(x, y) {
+  x: number;
+  y: number;
+
+  constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }

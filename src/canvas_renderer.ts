@@ -3,29 +3,22 @@ import { Vec2d } from "./vector2d.js";
 import { Girih, GirihType } from "./girih_tiles.js";
 
 export class CanvasRenderer {
-  /**
-   * @param {HTMLCanvasElement} canvas
-   */
-  constructor(canvas) {
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+
+  constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     const ctx = canvas.getContext("2d");
     if (ctx == null) throw new Error("Unsupported browser");
     this.ctx = ctx;
   }
 
-  /**
-   * @param {Girih} girih
-   */
-  drawGirih(girih) {
+  drawGirih(girih: Girih) {
     this.drawFromAngles(girih.center, this.getAngles(girih.girihtype)); // TODO : Séparer center de start point
   }
 
   // TODO : Vraiment besoin d'une fonction ?
-  /**
-   * @param {Vec2d} startPoint
-   * @param {number[]} angles
-   */
-  drawFromAngles(startPoint, angles) {
+  drawFromAngles(startPoint: Vec2d, angles: number[]) {
     let x = startPoint.x;
     let y = startPoint.y;
 
@@ -53,10 +46,7 @@ export class CanvasRenderer {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  /**
-   * @returns {number[]}
-   */
-  getAngles(girihtype) {
+  getAngles(girihtype: GirihType) {
     let angle = 36 * (girihtype & 7);
 
     switch (girihtype & ~7) {

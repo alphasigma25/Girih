@@ -4,7 +4,9 @@ import { Girih, GirihType } from "./girih_tiles.js";
 import { Vec2d } from "./vector2d.js";
 
 const canvas = document.getElementById("c");
-const shape = document.getElementsByName("shape");
+const shape: NodeListOf<HTMLInputElement> = document.getElementsByName(
+  "shape"
+) as any; // TODO : Chercher une meilleure solution que as any
 
 for (const element of shape) {
   if (!(element instanceof HTMLInputElement))
@@ -23,10 +25,10 @@ if (!(canvas instanceof HTMLCanvasElement))
 
 const renderer = new CanvasRenderer(canvas);
 
-const shapes = [];
+const shapes: Girih[] = [];
 
 // TODO : Vraiment besoin d'une fonction ?
-function addShape(center) {
+function addShape(center: Vec2d) {
   shapes.push(new Girih(center, currGirihType));
 }
 
