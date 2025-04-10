@@ -15,10 +15,14 @@ for (const element of shape) {
 
 const shape_selection = document.getElementById("shape");
 const clearButton = document.getElementById("clear");
+const rotatecwButton = document.getElementById("rotatecw");
+const rotateacwButton = document.getElementById("rotateacw");
 
 if (canvas == null) throw new Error("Unsupported browser");
 if (shape_selection == null) throw new Error("Unsupported browser");
 if (clearButton == null) throw new Error("Unsupported browser");
+if (rotatecwButton == null) throw new Error("Unsupported browser");
+if (rotateacwButton == null) throw new Error("Unsupported browser");
 
 if (!(canvas instanceof HTMLCanvasElement))
   throw new Error("Unsupported browser");
@@ -27,9 +31,11 @@ const renderer = new CanvasRenderer(canvas);
 
 const shapes: Girih[] = [];
 
-// TODO : Vraiment besoin d'une fonction ?
+// TODO : Vraiment besoin d'une fonction ? oui. pour l'instant.
 function addShape(center: Vec2d) {
-  shapes.push(new Girih(center, currGirihType));
+  shapes.push(new Girih(center, currGirihType + currRotation));
+  console.log(currGirihType + currRotation);
+  console.log(currRotation);
 }
 
 function draw() {
@@ -43,6 +49,22 @@ function draw() {
 }
 
 let currGirihType = GirihType.deca;
+let currRotation = 0;
+
+function RotateShapes(isClockwise: boolean){
+  console.log("coucou")
+  if (isClockwise) {currRotation += 1;}
+  else { currRotation += 4; }
+  currRotation = currRotation % 5;
+  //console.log(currRotation);
+}
+
+rotatecwButton.addEventListener("click", () => {
+  RotateShapes(true);
+})
+rotateacwButton.addEventListener("click", () => {
+  RotateShapes(false);
+})
 
 shape_selection.addEventListener("click", () => {
   let curr_shape = "1";
@@ -70,6 +92,7 @@ shape_selection.addEventListener("click", () => {
     default:
       throw new Error("Unsupported browser");
   }
+  console.log(currGirihType);
 });
 
 clearButton.addEventListener("click", () => {
@@ -86,7 +109,7 @@ canvas.addEventListener("mousemove", (ev) => {
 
   // Dessiner la forme temporaire à l'emplacement de la souris
   renderer.drawGirih(
-    new Girih(new Vec2d(ev.offsetX, ev.offsetY), currGirihType)
+    new Girih(new Vec2d(ev.offsetX, ev.offsetY), currGirihType + currRotation)
   );
 });
 

@@ -29,8 +29,8 @@ export class CanvasRenderer {
     let currAngle = angles[0];
     for (let i = 1; i < angles.length; i++) {
       // Calculer le prochain point en utilisant la longueur du côté et l'angle
-      x += 10 * Math.cos((currAngle * Math.PI) / 180);
-      y += 10 * Math.sin((currAngle * Math.PI) / 180);
+      x += 20 * Math.cos((currAngle * Math.PI) / 180);
+      y += 20 * Math.sin((currAngle * Math.PI) / 180);
 
       // Tracer la ligne jusqu'au nouveau point
       this.ctx.lineTo(x, y);
